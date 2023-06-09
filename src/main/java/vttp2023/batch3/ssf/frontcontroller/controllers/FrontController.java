@@ -48,7 +48,7 @@ public class FrontController {
 		// System.out.println(login.getLoginAttempts());
 
 		//captcha authentication
- 		if (login.getLoginAttempts() >= 0) {
+ 		if (captcha != null) {
 
 			if (captcha.getAnswer() != captcha.getResult()) {
 
