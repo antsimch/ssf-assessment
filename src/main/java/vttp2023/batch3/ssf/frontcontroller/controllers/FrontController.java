@@ -24,6 +24,12 @@ public class FrontController {
 		this.authService = authService;
 	}
 
+	@GetMapping(path = "/")
+	public String redirectFromIndex(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
+	}
+
 	@GetMapping(path = "/login")
 	public String getLandingPage(Model model) {
 		model.addAttribute("user", new User());
@@ -42,7 +48,7 @@ public class FrontController {
 		// System.out.println(login.getLoginAttempts());
 
 		//captcha authentication
- 		if (login.getLoginAttempts() > 0) {
+ 		if (login.getLoginAttempts() >= 0) {
 
 			if (captcha.getAnswer() != captcha.getResult()) {
 
@@ -111,6 +117,7 @@ public class FrontController {
 
 		user.setAuthenticated(true);
 		session.setAttribute("login", login);
+		session.setAttribute("user", user);
 		return "view1";
 	}
 }
