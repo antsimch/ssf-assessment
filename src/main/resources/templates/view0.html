@@ -11,33 +11,61 @@
 	<body>
 
 		<h2>Please Login</h2>
+		<form action="#" method="POST" th:action="@{/login}" th:object="${user}">
+			<table>
+				<tr>
+					<td> 
+						<label for="username">Username:</label> 
+					</td>
+					<td>
+						<input type="text" th:field="*{username}" id="username" size="30" 
+								placeholder="Please type in your username" >
+					</td>
+					<td>
+						<span th:if="${#fields.hasErrors()}" th:text="*{username}"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="password">Password:</label>
+					</td>
+					<td>
+						<input type="password" th:field="*{password}" id="password" size="30" 
+								placeholder="Please type in your password">
+					</td>
+					<td>
+						<span th:if="${#fields.hasErrors()}" th:text="*{password}"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="captcha" th:if="${captcha != null}">What is <span th:if="${captcha != null}" th:text="${captcha.captchaString}"></span></label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="answer" th:if="${captcha != null}">Answer:</label>
+					</td>
+					<td>
+						<input type="answer" th:if="${captcha != null}" th:field="${captcha.answer}" id="answer" size="30" 
+								placeholder="Answer">
+					</td>
+				</tr>
+				<tr>
+					<td>
 
-		<table>
-			<tr>
-				<td> 
-					<label for="username">Username:</label> 
-				</td>
-				<td>
-					<input type="text" id="username" size="30" 
-							placeholder="Please type in your username" >
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="password">Password:</label>
-				</td>
-				<td>
-					<input type="password" id="password" size="30" 
-							placeholder="Please type in your password">
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<button>Login</button>
-				</td>
-			</tr>
-		</table>
-		
+					</td>
+					<td>
+						<span th:if="${error != null}" th:text="${error}"></span>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button input="submit">Login</button>
+					</td>
+				</tr>
+			</table>
+		</form>
 	</body>
 </html>
